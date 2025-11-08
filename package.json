@@ -1,0 +1,27 @@
+{
+  "name": "react-rxjs-redux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.2",
+    "rxjs": "^7.8.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.11"
+  }
+}
