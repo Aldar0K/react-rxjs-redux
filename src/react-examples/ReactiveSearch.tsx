@@ -1,3 +1,4 @@
+import { Alert, AlertDescription, Badge, Input, Label } from '@/shared/ui';
 import { useEffect, useRef, useState } from 'react';
 import { defer, fromEvent, of, throwError } from 'rxjs';
 import {
@@ -100,47 +101,71 @@ export default function ReactiveSearch() {
   const { query, results, loading, error } = state;
 
   return (
-    <section className="card">
-      <h2>Реактивный поиск</h2>
-      <p className="app__hint">
-        Поток событий из поля ввода проходит через RxJS (debounce, distinct,
-        switchMap) и имитирует запрос к API.
-      </p>
+    <div className="space-y-4">
+      <header className="space-y-1">
+        <h2 className="text-xl font-semibold">Реактивный поиск</h2>
+        <p className="text-sm text-muted-foreground">
+          Поток событий из поля ввода проходит через RxJS и имитирует запрос к API
+          c <code>debounceTime</code>, <code>distinctUntilChanged</code> и{' '}
+          <code>switchMap</code>.
+        </p>
+      </header>
 
-      <label className="field">
-        <span>Запрос:</span>
-        <input
+      <div className="space-y-2">
+        <Label htmlFor="reactive-search-input">Запрос</Label>
+        <Input
+          id="reactive-search-input"
           ref={inputRef}
           type="search"
           placeholder="Например, rx или react"
           autoComplete="off"
+          className="h-12 text-base"
         />
-      </label>
+      </div>
 
-      {loading && <p className="status status--loading">Ищу совпадения...</p>}
+      {loading && (
+        <Badge
+          variant="secondary"
+          className="inline-flex w-fit items-center gap-2 rounded-full px-4 py-1 text-sm font-medium"
+        >
+          <span className="h-2 w-2 animate-ping rounded-full bg-primary" />
+          Ищу совпадения...
+        </Badge>
+      )}
 
       {error && (
-        <p className="status status--error">
-          Ошибка запроса: <span>{error}</span>
-        </p>
+        <Alert variant="destructive">
+          <AlertDescription>
+            Ошибка запроса: <span className="font-semibold">{error}</span>
+          </AlertDescription>
+        </Alert>
       )}
 
       {!loading && !error && query === '' && (
-        <p className="app__hint">Начните печатать, чтобы увидеть результаты.</p>
+        <p className="text-sm text-muted-foreground">
+          Начните печатать, чтобы увидеть результаты.
+        </p>
       )}
 
       {!loading && !error && query !== '' && results.length === 0 && (
-        <p className="app__hint">Ничего не найдено для «{query}».</p>
+        <p className="text-sm text-muted-foreground">
+          Ничего не найдено для «{query}».
+        </p>
       )}
 
       {!loading && !error && results.length > 0 && (
-        <ul className="results">
+        <ul className="grid gap-2">
           {results.map(item => (
-            <li key={item}>{item}</li>
+            <li
+              key={item}
+              className="rounded-xl border border-border/60 bg-muted/40 px-4 py-3 text-sm font-semibold"
+            >
+              {item}
+            </li>
           ))}
         </ul>
       )}
-    </section>
+    </div>
   );
 }
 
