@@ -7,7 +7,12 @@ export default function Counter() {
 
   useEffect(() => {
     const sub = counterService.observe().subscribe(setCount);
-    return () => sub.unsubscribe();
+    counterService.startAutoIncrement();
+
+    return () => {
+      sub.unsubscribe();
+      counterService.stopAutoIncrement();
+    };
   }, []);
 
   return (
@@ -17,7 +22,8 @@ export default function Counter() {
           BehaviorSubject как мини-сервис состояния
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Компонент только подписывается и вызывает действия increment/decrement.
+          Сервис под капотом слушает interval и каждую секунду увеличивает значение, а
+          компонент только подписывается и вызывает ручные действия increment/decrement.
         </p>
       </header>
 

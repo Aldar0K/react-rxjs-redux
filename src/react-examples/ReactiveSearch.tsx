@@ -8,7 +8,7 @@ import {
   distinctUntilChanged,
   map,
   startWith,
-  switchMap
+  switchMap,
 } from 'rxjs/operators';
 
 const technologies = [
@@ -27,8 +27,22 @@ const technologies = [
   'Solid',
   'Svelte',
   'Vue',
-  'Zustand'
+  'Zustand',
 ];
+
+function fakeSearch(query: string) {
+  return defer(() => {
+    const normalized = query.toLowerCase();
+    const matches = technologies.filter(item => item.toLowerCase().includes(normalized));
+
+    const shouldFail = Math.random() < 0.15;
+    if (shouldFail) {
+      return throwError(() => new Error('Сервер временно недоступен'));
+    }
+
+    return of(matches);
+  }).pipe(delay(500 + Math.random() * 500));
+}
 
 export default function ReactiveSearch() {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -36,7 +50,7 @@ export default function ReactiveSearch() {
     query: '',
     results: [] as string[],
     loading: false,
-    error: null as string | null
+    error: null as string | null,
   });
 
   useEffect(() => {
@@ -56,7 +70,7 @@ export default function ReactiveSearch() {
               query: '',
               results: [] as string[],
               loading: false,
-              error: null as string | null
+              error: null as string | null,
             });
           }
 
@@ -65,23 +79,20 @@ export default function ReactiveSearch() {
               query,
               results,
               loading: false,
-              error: null as string | null
+              error: null as string | null,
             })),
             startWith({
               query,
               results: [] as string[],
               loading: true,
-              error: null as string | null
+              error: null as string | null,
             }),
-            catchError(error =>
+            catchError((error: unknown) =>
               of({
                 query,
                 results: [] as string[],
                 loading: false,
-                error:
-                  error instanceof Error
-                    ? error.message
-                    : 'Неизвестная ошибка'
+                error: error instanceof Error ? error.message : 'Неизвестная ошибка',
               })
             )
           );
@@ -90,7 +101,7 @@ export default function ReactiveSearch() {
           query: '',
           results: [] as string[],
           loading: false,
-          error: null as string | null
+          error: null as string | null,
         })
       )
       .subscribe(setState);
@@ -105,8 +116,8 @@ export default function ReactiveSearch() {
       <header className="space-y-1">
         <h2 className="text-xl font-semibold">Реактивный поиск</h2>
         <p className="text-sm text-muted-foreground">
-          Поток событий из поля ввода проходит через RxJS и имитирует запрос к API
-          c <code>debounceTime</code>, <code>distinctUntilChanged</code> и{' '}
+          Поток событий из поля ввода проходит через RxJS и имитирует запрос к API c{' '}
+          <code>debounceTime</code>, <code>distinctUntilChanged</code> и{' '}
           <code>switchMap</code>.
         </p>
       </header>
@@ -148,9 +159,7 @@ export default function ReactiveSearch() {
       )}
 
       {!loading && !error && query !== '' && results.length === 0 && (
-        <p className="text-sm text-muted-foreground">
-          Ничего не найдено для «{query}».
-        </p>
+        <p className="text-sm text-muted-foreground">Ничего не найдено для «{query}».</p>
       )}
 
       {!loading && !error && results.length > 0 && (
@@ -167,20 +176,4 @@ export default function ReactiveSearch() {
       )}
     </div>
   );
-}
-
-function fakeSearch(query: string) {
-  return defer(() => {
-    const normalized = query.toLowerCase();
-    const matches = technologies.filter(item =>
-      item.toLowerCase().includes(normalized)
-    );
-
-    const shouldFail = Math.random() < 0.15;
-    if (shouldFail) {
-      return throwError(() => new Error('Сервер временно недоступен'));
-    }
-
-    return of(matches);
-  }).pipe(delay(500 + Math.random() * 500));
 }
