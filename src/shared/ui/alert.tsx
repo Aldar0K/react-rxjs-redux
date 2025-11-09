@@ -10,12 +10,12 @@ const alertVariants = cva(
       variant: {
         default: 'border-border bg-card text-card-foreground',
         destructive:
-          'border-destructive/60 text-destructive shadow-sm shadow-destructive/20'
-      }
+          'border-destructive/60 text-destructive shadow-sm shadow-destructive/20',
+      },
     },
     defaultVariants: {
-      variant: 'default'
-    }
+      variant: 'default',
+    },
   }
 );
 

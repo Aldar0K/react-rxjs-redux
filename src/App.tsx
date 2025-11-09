@@ -15,8 +15,8 @@ export function App() {
             Практика реактивности в компонентах
           </h1>
           <p className="text-muted-foreground">
-            Мини-примеры показывают, как использовать Observable-потоки в React
-            через <code>useEffect</code>, подписки и сервисы на базе RxJS.
+            Мини-примеры показывают, как использовать Observable-потоки в React через{' '}
+            <code>useEffect</code>, подписки и сервисы на базе RxJS.
           </p>
         </header>
 

@@ -8,5 +8,5 @@ interval(1000)
   )
   .subscribe({
     next: value => addLog(intervalView.list, `tick → ${value}`),
-    complete: () => addLog(intervalView.list, 'complete')
+    complete: () => addLog(intervalView.list, 'complete'),
   });

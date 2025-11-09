@@ -17,5 +17,8 @@ clicks
   )
   .subscribe(pos => {
     console.log('click:', pos);
-    document.body.insertAdjacentHTML('beforeend', `<pre>click: x=${pos.x}, y=${pos.y}</pre>`);
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<pre>click: x=${pos.x}, y=${pos.y}</pre>`
+    );
   });

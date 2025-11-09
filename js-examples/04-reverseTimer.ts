@@ -9,5 +9,5 @@ timer(0, 1000)
   )
   .subscribe({
     next: value => addLog(reverseTimerView.list, `осталось → ${value}`),
-    complete: () => addLog(reverseTimerView.list, 'Время вышло!')
-  })
+    complete: () => addLog(reverseTimerView.list, 'Время вышло!'),
+  });

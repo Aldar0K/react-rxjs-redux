@@ -40,7 +40,7 @@ const fakeDatabase = [
   'Solid',
   'Svelte',
   'Vue',
-  'Zustand'
+  'Zustand',
 ];
 
 function fakeSearch(query: string) {
@@ -57,9 +57,7 @@ fromEvent<InputEvent>(searchInput, 'input')
     map(event => (event.target as HTMLInputElement).value),
     debounceTime(300),
     distinctUntilChanged(),
-    switchMap(query =>
-      fakeSearch(query).pipe(map(results => ({ query, results })))
-    )
+    switchMap(query => fakeSearch(query).pipe(map(results => ({ query, results }))))
   )
   .subscribe(({ query, results }) => {
     if (!query.trim()) {
@@ -72,7 +70,5 @@ fromEvent<InputEvent>(searchInput, 'input')
       return;
     }
 
-    resultsArea.innerHTML = results
-      .map(item => `<pre>${item}</pre>`)
-      .join('');
+    resultsArea.innerHTML = results.map(item => `<pre>${item}</pre>`).join('');
   });
