@@ -1,5 +1,5 @@
-import { UsersEpicDemo, UsersStoreDemo } from '@/features/users';
 import { SearchUsersDemo } from '@/features/search-users';
+import { UsersEpicDemo } from '@/features/users';
 import { Card, CardContent } from '@/shared/ui';
 
 export function App() {
@@ -40,12 +40,6 @@ export function App() {
         <Card>
           <CardContent className="p-6">
             <SearchUsersDemo />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <UsersStoreDemo />
           </CardContent>
         </Card>
       </div>
