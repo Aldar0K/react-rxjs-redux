@@ -1,4 +1,5 @@
+import { fetchUsersEpic } from '@/features/users';
+import { searchUsersEpic } from '@/features/search-users';
 import { combineEpics } from 'redux-observable';
-import { fetchUsersEpic } from '@/features/users/usersEpic';
 
-export const rootEpic = combineEpics(fetchUsersEpic);
+export const rootEpic = combineEpics(fetchUsersEpic, searchUsersEpic);

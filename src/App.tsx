@@ -1,9 +1,6 @@
+import { UsersEpicDemo, UsersStoreDemo } from '@/features/users';
+import { SearchUsersDemo } from '@/features/search-users';
 import { Card, CardContent } from '@/shared/ui';
-import Counter from './react-examples/Counter';
-import ReactiveApiSearch from './react-examples/ReactiveApiSearch';
-import ReactiveSearch from './react-examples/ReactiveSearch';
-import Timer from './react-examples/Timer';
-import UsersEpicDemo from './react-examples/UsersEpicDemo';
 
 export function App() {
   return (
@@ -36,21 +33,21 @@ export function App() {
 
         <Card>
           <CardContent className="p-6">
-            <ReactiveApiSearch />
+            <UsersEpicDemo />
           </CardContent>
         </Card>
 
         <Card>
           <CardContent className="p-6">
-            <UsersEpicDemo />
+            <SearchUsersDemo />
           </CardContent>
         </Card>
 
-        {/* <Card>
+        <Card>
           <CardContent className="p-6">
-            <Counter />
+            <UsersStoreDemo />
           </CardContent>
-        </Card> */}
+        </Card>
       </div>
     </div>
   );

@@ -1,9 +1,5 @@
+import { User } from '@/entities/users';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface User {
-  id: number;
-  firstName: string;
-}
 
 interface UsersState {
   loading: boolean;
@@ -33,6 +29,9 @@ const usersSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    resetUsers: () => ({
+      ...initialState,
+    }),
   },
 });
 

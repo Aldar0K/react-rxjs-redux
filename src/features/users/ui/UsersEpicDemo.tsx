@@ -1,10 +1,13 @@
-import { usersActions } from '@/features/users/usersSlice';
+import { usersActions } from '@/features/users/model/usersSlice';
+import { selectUsersData, selectUsersError, selectUsersLoading } from '@/features/users';
 import { Button } from '@/shared/ui';
 import { useAppDispatch, useAppSelector } from '@/shared/utils';
 
-export default function UsersEpicDemo() {
+export function UsersEpicDemo() {
   const dispatch = useAppDispatch();
-  const { data, loading, error } = useAppSelector(state => state.users);
+  const data = useAppSelector(selectUsersData);
+  const loading = useAppSelector(selectUsersLoading);
+  const error = useAppSelector(selectUsersError);
 
   return (
     <div className="space-y-4">
