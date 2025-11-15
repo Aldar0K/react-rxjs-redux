@@ -1,7 +1,9 @@
 import { Card, CardContent } from '@/shared/ui';
 import Counter from './react-examples/Counter';
+import ReactiveApiSearch from './react-examples/ReactiveApiSearch';
 import ReactiveSearch from './react-examples/ReactiveSearch';
 import Timer from './react-examples/Timer';
+import UsersEpicDemo from './react-examples/UsersEpicDemo';
 
 export function App() {
   return (
@@ -20,23 +22,35 @@ export function App() {
           </p>
         </header>
 
-        <Card>
+        {/* <Card>
           <CardContent className="p-6">
             <Timer />
           </CardContent>
-        </Card>
+        </Card> */}
 
-        <Card>
+        {/* <Card>
           <CardContent className="p-6">
             <ReactiveSearch />
           </CardContent>
+        </Card> */}
+
+        <Card>
+          <CardContent className="p-6">
+            <ReactiveApiSearch />
+          </CardContent>
         </Card>
 
         <Card>
           <CardContent className="p-6">
-            <Counter />
+            <UsersEpicDemo />
           </CardContent>
         </Card>
+
+        {/* <Card>
+          <CardContent className="p-6">
+            <Counter />
+          </CardContent>
+        </Card> */}
       </div>
     </div>
   );
